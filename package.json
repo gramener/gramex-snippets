@@ -1,0 +1,21 @@
+{
+    "name": "gramex-yaml-snippets",
+    "displayName": "gramex-yaml-snippets",
+    "description": "",
+    "version": "1.0.2",
+    "publisher": "gramener",
+    "engines": {
+        "vscode": "^1.31.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+            {
+                "language": "yaml",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+    }
+}

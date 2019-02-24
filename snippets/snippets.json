@@ -1,0 +1,112 @@
+{
+  "filehandler": {
+    "prefix": "filehandler",
+    "body": [
+      "project/home:",
+      "  pattern: /\\$YAMLURL/home",
+      "  handler: FileHandler",
+      "  kwargs:",
+      "    path: \\$YAMLPATH/file.html",
+      "    #auth: &HEADERS",
+      "    template: true"
+    ],
+    "description": "Gramex FileHandler endpoint"
+  },
+	"formhandler_db": {
+		"prefix": "formhandler_db",
+		"body": [
+			"db_endpoint_:",
+			"  pattern: /\\$YAMLURL/data",
+			"  handler: FormHandler",
+			"  kwargs:",
+			"    # prepare: project_app.prepare_args",
+			"    url: \\$connection_str               // this is a SQLAlchemy URL string",
+			"    table: table",
+			"    # modify: project_app.modify_data",
+      "    #auth: &HEADERS"
+		],
+    "description": "Gramex FormHandler Database endpoint"
+	},
+	"formhandler_csv": {
+		"prefix": "formhandler_csv",
+		"body": [
+			"csv_endpoint_:",
+			"  pattern: /\\$YAMLURL/data",
+			"  handler: FormHandler",
+			"  kwargs:",
+			"    # prepare: project_app.prepare_args",
+			"    url: \\$YAMLPATH/data/file.csv",
+			"    # modify: project_app.modify_data",
+      "    #auth: &HEADERS"
+		],
+    "description": "Gramex FormHandler CSV endpoint"
+	},
+	"cache_assets": {
+		"prefix": "cache_assets",
+		"body": [
+		  "project-static_files:",
+		  "  pattern: /\\$YAMLURL/(assets/data/.*|assets/img/.*)    # Map all static files",
+		  "  handler: FileHandler",
+		  "  kwargs:",
+		  "    path: \\$YAMLPATH/                            # from under this directory",
+		  "    Cache-Control: public, max-age=315360000      # Cache for 10 years on the browser",
+      "    #auth: &HEADERS",
+		  "  cache: true                                     # Also cache on the server"
+		],
+		"description": "Cache data files and images"
+  },
+  "auth_simple": {
+    "prefix": "auth_simple",
+    "body": [
+      "login/simple:",
+      "  pattern: /\\$YAMLURL/simple   # Map this URL",
+      "  handler: SimpleAuth         # to the SimpleAuth handler",
+      "  kwargs:",
+      "    credentials:             # Specify the user IDs and passwords",
+      "      alpha: alpha             # User: alpha has password: alpha",
+      "      gamma:                  # The user gamma is defined as a mapping",
+      "        password: pwd         # One of the keys MUST be 'password'",
+      "        role: user            # Additional keys can be defined",
+      "    template: \\$YAMLPATH/simple.html   # Optional login template"
+    ],
+    "description": "SimpleAuth mechanism in Gramex"
+  },
+	"gramex_email": {
+		"prefix": "gramex_email",
+		"body": [
+			"email:",
+			"  gramex-guide-gmail:",
+			"  type: gmail                     # Type of email used is GMail",
+			"  email: gramex.guide@gmail.com   # Generic email ID used to test e-mails",
+			"  password: tlpmupxnhucitpte      # App-specific password created for Gramex guide"
+		],
+		"description": "Gramex guide email config"
+	},
+	"custom_session": {
+		"prefix": "custom_session",
+		"body": [
+			"app:",
+			"  session:",
+			"    type: json                               # Type of store to use: json, sqlite, memory",
+			"    path: \\$YAMLPATH/sessions/session.json  # Path to the store (ignored for type: memory)",
+			"    expiry: 31                               # Session cookies expiry in days",
+			"    flush: 5                                 # Write store to disk periodically (in seconds)",
+			"    purge: 111600                            # Delete old sessions periodically (31 days, in seconds)",
+			"  settings:",
+			"    serve_traceback: False"
+		],
+		"description": "Custom session config"
+	},
+	"custom_log": {
+		"prefix": "custom_log",
+		"body": [
+			"log:",
+			"  handlers:",
+			"    logfile:",
+			"      filename: \\$GRAMEXDATA/your_app/gramex.log",
+			"    requests:",
+			"      filename: \\$GRAMEXDATA/your_app/requests.csv",
+		],
+		"description": "Custom log config"
+	}
+}
