@@ -12,7 +12,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://code.gramener.com/cto/gramex-yaml-snippets.git"
+        "url": "https://github.com/gramener/gramex.git"
     },
     "contributes": {
         "snippets": [
