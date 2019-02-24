@@ -71,6 +71,37 @@
     ],
     "description": "SimpleAuth mechanism in Gramex"
   },
+  "auth_google": {
+    "prefix": "auth_google",
+    "body": [
+      "login/google:",
+      "  pattern: /\\$YAMLURL/google   # Map this URL",
+      "  handler: GoogleAuth         # to the GoogleAuth handler",
+      "  kwargs:",
+      "    key: YOURKEY            # Set your app key",
+      "    secret: YOURSECRET      # Set your app secret"
+    ],
+    "description": "GoogleAuth configuration in Gramex"
+  },
+  "auth_db": {
+    "prefix": "auth_db",
+    "body": [
+      "project/db:",
+      "  pattern: /\\$YAMLURL/db           # Map this URL",
+      "  handler: DBAuth                   # to the DBAuth handler",
+      "  kwargs:",
+      "    url: $YAMLPATH/auth.xlsx        # Pick up list of users from this XLSX (or CSV) file",
+      "    user:",
+      "      column: user                  # The user column in users table has the user ID",
+      "    password:",
+      "      column: password              # The users.password column has the password",
+      "    redirect:                       # After logging in, redirect the user to:",
+      "      query: next                   #      the ?next= URL",
+      "      header: Referer               # else the Referer: header (i.e. page before login)",
+      "      url: /\\$YAMLURL/             # else the home page of current directory"
+    ],
+    "description": "DBAuth configuration in Gramex"
+  },
 	"gramex_email": {
 		"prefix": "gramex_email",
 		"body": [

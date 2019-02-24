@@ -2,7 +2,7 @@
     "name": "gramex-yaml-snippets",
     "displayName": "gramex-yaml-snippets",
     "description": "",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "publisher": "gramener",
     "engines": {
         "vscode": "^1.31.0"
@@ -10,6 +10,10 @@
     "categories": [
         "Snippets"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://code.gramener.com/cto/gramex-yaml-snippets.git"
+    },
     "contributes": {
         "snippets": [
             {
