@@ -1,19 +1,20 @@
 {
-    "name": "gramex-yaml-snippets",
-    "displayName": "gramex-yaml-snippets",
+    "name": "gramexsnippets",
+    "displayName": "Gramex Snippets",
     "description": "",
-    "version": "1.1.0",
+    "version": "1.2.1",
     "publisher": "gramener",
+    "icon": "images/favicon.ico",
+    "galleryBanner": {
+        "color": "#ff6347",
+        "theme": "dark"
+    },
     "engines": {
         "vscode": "^1.31.0"
     },
     "categories": [
         "Snippets"
     ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/gramener/gramex.git"
-    },
     "contributes": {
         "snippets": [
             {
@@ -21,5 +22,14 @@
                 "path": "./snippets/snippets.json"
             }
         ]
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gramener/gramex-snippets.git"
+    },
+    "bugs": {
+        "url": "https://github.com/gramener/gramex-snippets/issues",
+        "email": "bhanu.kamapantula@gramener.com"
+    },
+    "homepage": "https://github.com/gramener/gramex-snippets/blob/master/README.md"
 }

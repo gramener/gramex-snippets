@@ -1,12 +1,18 @@
-# gramex-yaml-snippets README
+# gramexsnippets README
 
 `YAML` code snippets for `Gramex` endpoints.
 
+## Requirements
+
+Needs `VSCode 1.31` or above.
+
 ## How to use
 
-In `gramex.yaml` file, type `form`... it should prompt two `FormHandler` related snippets as suggestions.
+In `gramex.yaml` or any `.yaml` file, type `grx-form`... it should prompt two `FormHandler` related snippets as suggestions.
 
-Supported snippet commands: `filehandler`, `formhandler_db`, `formhandler_csv`, `gramex_email`, `custom_session`, `custom_log`, `cache_assets`, `auth_db`, `auth_google`, `auth_simple`.
+Supported snippet commands: `grx-filehandler`, `grx-formhandler_db`, `grx-formhandler_csv`, `grx-email`, `grx-custom_session`, `grx-custom_log`, `grx-cache_assets`, `grx-auth_db`, `grx-auth_google`, `grx-auth_simple`.
+
+![how gramex snippet works](images/gramex-snippets.gif)
 
 ## Features
 

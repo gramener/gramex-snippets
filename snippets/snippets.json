@@ -1,6 +1,6 @@
 {
   "filehandler": {
-    "prefix": "filehandler",
+    "prefix": "grx-filehandler",
     "body": [
       "project/home:",
       "  pattern: /\\$YAMLURL/home",
@@ -13,7 +13,7 @@
     "description": "Gramex FileHandler endpoint"
   },
 	"formhandler_db": {
-		"prefix": "formhandler_db",
+		"prefix": "grx-formhandler_db",
 		"body": [
 			"db_endpoint_:",
 			"  pattern: /\\$YAMLURL/data",
@@ -28,7 +28,7 @@
     "description": "Gramex FormHandler Database endpoint"
 	},
 	"formhandler_csv": {
-		"prefix": "formhandler_csv",
+		"prefix": "grx-formhandler_csv",
 		"body": [
 			"csv_endpoint_:",
 			"  pattern: /\\$YAMLURL/data",
@@ -42,7 +42,7 @@
     "description": "Gramex FormHandler CSV endpoint"
 	},
 	"cache_assets": {
-		"prefix": "cache_assets",
+		"prefix": "grx-cache_assets",
 		"body": [
 		  "project-static_files:",
 		  "  pattern: /\\$YAMLURL/(assets/data/.*|assets/img/.*)    # Map all static files",
@@ -56,7 +56,7 @@
 		"description": "Cache data files and images"
   },
   "auth_simple": {
-    "prefix": "auth_simple",
+    "prefix": "grx-auth_simple",
     "body": [
       "login/simple:",
       "  pattern: /\\$YAMLURL/simple   # Map this URL",
@@ -72,7 +72,7 @@
     "description": "SimpleAuth mechanism in Gramex"
   },
   "auth_google": {
-    "prefix": "auth_google",
+    "prefix": "grx-auth_google",
     "body": [
       "login/google:",
       "  pattern: /\\$YAMLURL/google   # Map this URL",
@@ -84,7 +84,7 @@
     "description": "GoogleAuth configuration in Gramex"
   },
   "auth_db": {
-    "prefix": "auth_db",
+    "prefix": "grx-auth_db",
     "body": [
       "project/db:",
       "  pattern: /\\$YAMLURL/db           # Map this URL",
@@ -103,7 +103,7 @@
     "description": "DBAuth configuration in Gramex"
   },
 	"gramex_email": {
-		"prefix": "gramex_email",
+		"prefix": "grx-email",
 		"body": [
 			"email:",
 			"  gramex-guide-gmail:",
@@ -114,7 +114,7 @@
 		"description": "Gramex guide email config"
 	},
 	"custom_session": {
-		"prefix": "custom_session",
+		"prefix": "grx-custom_session",
 		"body": [
 			"app:",
 			"  session:",
@@ -129,7 +129,7 @@
 		"description": "Custom session config"
 	},
 	"custom_log": {
-		"prefix": "custom_log",
+		"prefix": "grx-custom_log",
 		"body": [
 			"log:",
 			"  handlers:",
