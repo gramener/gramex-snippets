@@ -3,71 +3,82 @@
     "prefix": "grx-filehandler",
     "body": [
       "project/home:",
-      "  pattern: /\\$YAMLURL/home",
-      "  handler: FileHandler",
-      "  kwargs:",
-      "    path: \\$YAMLPATH/file.html",
-      "    #auth: &HEADERS",
-      "    template: true"
+      "\tpattern: /\\$YAMLURL/${1:home}",
+      "\thandler: FileHandler",
+      "\tkwargs:",
+      "\t\tpath: \\$YAMLPATH/'${2:index}'.html",
+      "\t\t#auth: &HEADERS",
+      "\t\ttemplate: true"
     ],
     "description": "Gramex FileHandler endpoint"
   },
-	"formhandler_db": {
-		"prefix": "grx-formhandler_db",
-		"body": [
-			"db_endpoint_:",
-			"  pattern: /\\$YAMLURL/data",
-			"  handler: FormHandler",
-			"  kwargs:",
-			"    # prepare: project_app.prepare_args",
-			"    url: \\$connection_str               // this is a SQLAlchemy URL string",
-			"    table: table",
-			"    # modify: project_app.modify_data",
-      "    #auth: &HEADERS"
-		],
+  "formhandler_db": {
+    "prefix": "grx-formhandler_db",
+    "body": [
+      "db_endpoint_:",
+      "\tpattern: /\\$YAMLURL/'$1'",
+      "\thandler: FormHandler",
+      "\tkwargs:",
+      "\t\t# prepare: '$2'.'$3'",
+      "\t\turl: \\$connection_str               // this is a SQLAlchemy URL string",
+      "\t\ttable: '$4'",
+      "\t\t# modify: project_app.modify_data",
+      "\t\t#auth: &HEADERS"
+    ],
     "description": "Gramex FormHandler Database endpoint"
-	},
-	"formhandler_csv": {
-		"prefix": "grx-formhandler_csv",
-		"body": [
-			"csv_endpoint_:",
-			"  pattern: /\\$YAMLURL/data",
-			"  handler: FormHandler",
-			"  kwargs:",
-			"    # prepare: project_app.prepare_args",
-			"    url: \\$YAMLPATH/data/file.csv",
-			"    # modify: project_app.modify_data",
-      "    #auth: &HEADERS"
-		],
+  },
+  "formhandler_csv": {
+    "prefix": "grx-formhandler_csv",
+    "body": [
+      "csv_endpoint_:",
+      "\tpattern: /\\$YAMLURL/'${1:data}'",
+      "\thandler: FormHandler",
+      "\tkwargs:",
+      "\t\t# prepare: project_app.prepare_args",
+      "\t\turl: \\$YAMLPATH/assets/data/'${2:data}'.csv",
+      "\t\t# modify: project_app.modify_data",
+      "\t\t#auth: &HEADERS"
+    ],
     "description": "Gramex FormHandler CSV endpoint"
-	},
-	"cache_assets": {
-		"prefix": "grx-cache_assets",
-		"body": [
-		  "project-static_files:",
-		  "  pattern: /\\$YAMLURL/(assets/data/.*|assets/img/.*)    # Map all static files",
-		  "  handler: FileHandler",
-		  "  kwargs:",
-		  "    path: \\$YAMLPATH/                            # from under this directory",
-		  "    Cache-Control: public, max-age=315360000      # Cache for 10 years on the browser",
-      "    #auth: &HEADERS",
-		  "  cache: true                                     # Also cache on the server"
-		],
-		"description": "Cache data files and images"
+  },
+  "cache_assets": {
+    "prefix": "grx-cache_assets",
+    "body": [
+      "project-static_files:",
+      "\tpattern: /\\$YAMLURL/(assets/data/.*|assets/img/.*)    # Map all static files",
+      "\thandler: FileHandler",
+      "\tkwargs:",
+      "\t\tpath: \\$YAMLPATH/                            # from under this directory",
+      "\t\tCache-Control: public, max-age=315360000      # Cache for 10 years on the browser",
+      "\t\t#auth: &HEADERS",
+      "\tcache: true                                     # Also cache on the server"
+    ],
+    "description": "Cache data files and images"
+  },
+  "functionhandler": {
+    "prefix": "grx-function",
+    "body": [
+      "project-function:",
+      "\tpattern: /\\$YAMLURL/'${1:func}'",
+      "\thandler: FunctionHandler",
+      "\tkwargs:",
+      "\t\tfunction: '${2:project_app}'.utility"
+    ],
+    "description": "Gramex function handler"
   },
   "auth_simple": {
     "prefix": "grx-auth_simple",
     "body": [
       "login/simple:",
-      "  pattern: /\\$YAMLURL/simple   # Map this URL",
-      "  handler: SimpleAuth         # to the SimpleAuth handler",
-      "  kwargs:",
-      "    credentials:             # Specify the user IDs and passwords",
-      "      alpha: alpha             # User: alpha has password: alpha",
-      "      gamma:                  # The user gamma is defined as a mapping",
-      "        password: pwd         # One of the keys MUST be 'password'",
-      "        role: user            # Additional keys can be defined",
-      "    template: \\$YAMLPATH/simple.html   # Optional login template"
+      "\tpattern: /\\$YAMLURL/'${1:simple}'   # Map this URL",
+      "\thandler: SimpleAuth         # to the SimpleAuth handler",
+      "\tkwargs:",
+      "\t\tcredentials:             # Specify the user IDs and passwords",
+      "\t\t\talpha: alpha             # User: alpha has password: alpha",
+      "\t\t\tgamma:                  # The user gamma is defined as a mapping",
+      "\t\t\t\tpassword: pwd         # One of the keys MUST be 'password'",
+      "\t\t\t\trole: user            # Additional keys can be defined",
+      "\t\ttemplate: \\$YAMLPATH/'${2:simple}'.html   # Optional login template"
     ],
     "description": "SimpleAuth mechanism in Gramex"
   },
@@ -75,11 +86,11 @@
     "prefix": "grx-auth_google",
     "body": [
       "login/google:",
-      "  pattern: /\\$YAMLURL/google   # Map this URL",
-      "  handler: GoogleAuth         # to the GoogleAuth handler",
-      "  kwargs:",
-      "    key: YOURKEY            # Set your app key",
-      "    secret: YOURSECRET      # Set your app secret"
+      "\tpattern: /\\$YAMLURL/'${1:google}'   # Map this URL",
+      "\thandler: GoogleAuth         # to the GoogleAuth handler",
+      "\tkwargs:",
+      "\t\tkey: '${2:YOURKEY}'            # Set your app key",
+      "\t\tsecret: '${3:YOURSECRET}'      # Set your app secret"
     ],
     "description": "GoogleAuth configuration in Gramex"
   },
@@ -87,57 +98,99 @@
     "prefix": "grx-auth_db",
     "body": [
       "project/db:",
-      "  pattern: /\\$YAMLURL/db           # Map this URL",
-      "  handler: DBAuth                   # to the DBAuth handler",
-      "  kwargs:",
-      "    url: $YAMLPATH/auth.xlsx        # Pick up list of users from this XLSX (or CSV) file",
-      "    user:",
-      "      column: user                  # The user column in users table has the user ID",
-      "    password:",
-      "      column: password              # The users.password column has the password",
-      "    redirect:                       # After logging in, redirect the user to:",
-      "      query: next                   #      the ?next= URL",
-      "      header: Referer               # else the Referer: header (i.e. page before login)",
-      "      url: /\\$YAMLURL/             # else the home page of current directory"
+      "\tpattern: /\\$YAMLURL/'${1:db}'           # Map this URL",
+      "\thandler: DBAuth                   # to the DBAuth handler",
+      "\tkwargs:",
+      "\t\turl: \\$YAMLPATH/${2:auth.xlsx}        # Pick up list of users from this XLSX (or CSV) file",
+      "\t\tuser:",
+      "\t\t\tcolumn: user                  # The user column in users table has the user ID",
+      "\t\tpassword:",
+      "\t\t\tcolumn: password              # The users.password column has the password",
+      "\t\tredirect:                       # After logging in, redirect the user to:",
+      "\t\t\tquery: next                   #      the ?next= URL",
+      "\t\t\theader: Referer               # else the Referer: header (i.e. page before login)",
+      "\t\t\turl: /\\$YAMLURL/             # else the home page of current directory"
     ],
     "description": "DBAuth configuration in Gramex"
   },
-	"gramex_email": {
-		"prefix": "grx-email",
-		"body": [
-			"email:",
-			"  gramex-guide-gmail:",
-			"  type: gmail                     # Type of email used is GMail",
-			"  email: gramex.guide@gmail.com   # Generic email ID used to test e-mails",
-			"  password: tlpmupxnhucitpte      # App-specific password created for Gramex guide"
-		],
-		"description": "Gramex guide email config"
-	},
-	"custom_session": {
-		"prefix": "grx-custom_session",
-		"body": [
-			"app:",
-			"  session:",
-			"    type: json                               # Type of store to use: json, sqlite, memory",
-			"    path: \\$YAMLPATH/sessions/session.json  # Path to the store (ignored for type: memory)",
-			"    expiry: 31                               # Session cookies expiry in days",
-			"    flush: 5                                 # Write store to disk periodically (in seconds)",
-			"    purge: 111600                            # Delete old sessions periodically (31 days, in seconds)",
-			"  settings:",
-			"    serve_traceback: False"
-		],
-		"description": "Custom session config"
-	},
-	"custom_log": {
-		"prefix": "grx-custom_log",
-		"body": [
-			"log:",
-			"  handlers:",
-			"    logfile:",
-			"      filename: \\$GRAMEXDATA/your_app/gramex.log",
-			"    requests:",
-			"      filename: \\$GRAMEXDATA/your_app/requests.csv",
-		],
-		"description": "Custom log config"
-	}
+  "gramex_email": {
+    "prefix": "grx-email",
+    "body": [
+      "email:",
+      "\tgramex-guide-gmail:",
+      "\t\ttype: gmail                     # Type of email used is GMail",
+      "\t\temail: gramex.guide@gmail.com   # Generic email ID used to test e-mails",
+      "\t\tpassword: tlpmupxnhucitpte      # App-specific password created for Gramex guide"
+    ],
+    "description": "Gramex guide email config"
+  },
+  "custom_session": {
+    "prefix": "grx-custom_session",
+    "body": [
+      "app:",
+      "\tsession:",
+      "\t\ttype: json                               # Type of store to use: json, sqlite, memory",
+      "\t\tpath: \\$YAMLPATH/sessions/session.json  # Path to the store (ignored for type: memory)",
+      "\t\texpiry: 31                               # Session cookies expiry in days",
+      "\t\tflush: 5                                 # Write store to disk periodically (in seconds)",
+      "\t\tpurge: 111600                            # Delete old sessions periodically (31 days, in seconds)",
+      "\tsettings:",
+      "\t\tserve_traceback: False"
+    ],
+    "description": "Custom session config"
+  },
+  "custom_log": {
+    "prefix": "grx-custom_log",
+    "body": [
+      "log:",
+      "\thandlers:",
+      "\t\tlogfile:",
+      "\t\t\tfilename: \\$GRAMEXDATA/your_app/gramex.log",
+      "\t\trequests:",
+      "\t\t\tfilename: \\$GRAMEXDATA/your_app/requests.csv"
+    ],
+    "description": "Custom log config"
+  },
+  "schedule": {
+    "prefix": "grx-schedule",
+    "body": [
+      "schedule:",
+      "\trun-when-i-say:",
+      "\t\tfunction: '${1:schedule_utils}'.'${2:log_time()}'",
+      "\t\tminutes: '15, 45'           # Every 15th & 45th minute",
+      "\t\thours: '*/4'                # Every 4 hours",
+      "\t\tdates: '1, L'               # On the first and last days of the month",
+      "\t\tweekdays: 'mon-fri'         # On weekdays",
+      "\t\tmonths: '*'                 # In every month",
+      "\t\tyears: '2016, 2017'         # the next 2 years"
+    ],
+    "description": "Gramex scheduler"
+  },
+  "alert": {
+    "prefix": "grx-alert",
+    "body": [
+      "alert:",
+      "\talert-schedule:",
+      "\t\t#startup: true",
+      "\t\tdays: '*'                     # Send email every day",
+      "\t\thours: '6, 12'                # at 6am and 12noon local time",
+      "\t\tminutes: 0                    # at the 0th minute, i.e. 6:00am and 12:00pm",
+      "\t\tto: '${1:admin@example.org}'",
+      "\t\tsubject: '${2:Scheduled alert}'",
+      "\t\tbody: '${3:This email will be scheduled and sent as long as Gramex is running.}'"
+    ],
+    "description": "Gramex alert config"
+  },
+  "capture": {
+    "prefix": "grx-capture",
+    "body": [
+      "url:",
+      "\tcapture:",
+      "\t\tpattern: /\\$YAMLURL/capture",
+      "\t\thandler: CaptureHandler",
+      "\t\tkwargs:",
+      "\t\t\tengine: chrome     # runs on 9000 port"
+    ],
+    "description": "Gramex capture screenshot"
+  }
 }

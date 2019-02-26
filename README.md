@@ -10,7 +10,24 @@ Needs `VSCode 1.31` or above.
 
 In `gramex.yaml` or any `.yaml` file, type `grx-form`... it should prompt two `FormHandler` related snippets as suggestions.
 
-Supported snippet commands: `grx-filehandler`, `grx-formhandler_db`, `grx-formhandler_csv`, `grx-email`, `grx-custom_session`, `grx-custom_log`, `grx-cache_assets`, `grx-auth_db`, `grx-auth_google`, `grx-auth_simple`.
+Supported snippet commands:
+
+- `grx-filehandler`
+- `grx-functionhandler`
+- `grx-formhandler_db`
+- `grx-formhandler_csv`
+- `grx-email`
+- `grx-custom_session`
+- `grx-custom_log`
+- `grx-cache_assets`
+- `grx-auth_db`
+- `grx-auth_google`
+- `grx-auth_simple`
+- `grx-alert`
+- `grx-capture`
+- `grx-schedule`
+
+Use `tab` to change default parameters.
 
 ![how gramex snippet works](images/gramex-snippets.gif)
 
