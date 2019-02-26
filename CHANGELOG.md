@@ -3,6 +3,12 @@ All notable changes to the "gramexsnippets" extension will be documented in this
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.3]
+
+### Changed
+
+- Updated `README` with `GIF` for tab support
+
 ## [1.2.2]
 
 ### Added

@@ -27,9 +27,11 @@ Supported snippet commands:
 - `grx-capture`
 - `grx-schedule`
 
+![how gramex snippet works](images/gramex-snippets.gif)
+
 Use `tab` to change default parameters.
 
-![how gramex snippet works](images/gramex-snippets.gif)
+![gramex snippet with tab support](images/tab.gif)
 
 ## Features
 
