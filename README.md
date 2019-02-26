@@ -14,15 +14,15 @@ Supported snippet commands:
 
 - `grx-filehandler`
 - `grx-functionhandler`
-- `grx-formhandler_db`
-- `grx-formhandler_csv`
+- `grx-formhandler-db`
+- `grx-formhandler-csv`
 - `grx-email`
-- `grx-custom_session`
-- `grx-custom_log`
-- `grx-cache_assets`
-- `grx-auth_db`
-- `grx-auth_google`
-- `grx-auth_simple`
+- `grx-custom-session`
+- `grx-custom-log`
+- `grx-cache-assets`
+- `grx-auth-db`
+- `grx-auth-google`
+- `grx-auth-simple`
 - `grx-alert`
 - `grx-capture`
 - `grx-schedule`
@@ -30,8 +30,6 @@ Supported snippet commands:
 ![how gramex snippet works](images/gramex-snippets.gif)
 
 Use `tab` to change default parameters.
-
-![gramex snippet with tab support](images/tab.gif)
 
 ## Features
 

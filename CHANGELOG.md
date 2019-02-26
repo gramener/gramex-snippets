@@ -3,6 +3,12 @@ All notable changes to the "gramexsnippets" extension will be documented in this
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.0]
+
+### Changed
+
+- Updated `grx-*_*` to `grx-*-*`. Breaking change for prefixes.
+
 ## [1.2.3]
 
 ### Changed
