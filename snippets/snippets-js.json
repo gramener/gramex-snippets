@@ -1,0 +1,76 @@
+{
+	"inline_if": {
+		"prefix": "inline",
+		"body": [
+			"var val = array.indexOf(some_value) != -1 ? 'true' : 'false'"
+		],
+		"description": "Inline if condition"
+	},
+	"ajax": {
+		"prefix": "ajax",
+		"body": [
+			"function exported_method_(method, url, data) {",
+			"  $.ajax({",
+			"    type: method,",
+			"    url: url,",
+			"    data: data,",
+			"    success: function(response) {",
+			"      // response",
+			"    }",
+			"  })",
+			"}"
+		]
+	},
+	"slug": {
+		"prefix": "slug",
+		"body": [
+			"function slug_(text) {",
+			"  return text.toString().toLowerCase()",
+			"    .replace(/\\s+/g, '-')  // Replace whitespaces with hyphen",
+			"    .replace(/[^\\w\\\\\\-]+/g, '') // Remove all non-word chars",
+			"    .replace(/\\\\\\-\\\\\\-+/g, '-') // Replace multiple - with single -",
+			"    .replace(/^-+/, '') // Trim - from start of text",
+			"    .replace(/-+$/, '') // Trim - from end of text",
+			"}"
+		],
+		"description": "return sluggified text for URLs"
+	},
+	"notyfication": {
+		"prefix": "notyfication",
+		"body": [
+			"function notyfication_(noty_type, msg) {",
+			"  new Noty({",
+			"    type: noty_type,",
+			"    text: msg,",
+			"    timeout: 1000",
+			"  }).show()",
+			"}"
+		],
+		"description": "Noty for projects"
+	},
+	"camelCase": {
+		"prefix": "camelCase",
+		"body": [
+			"function toCamelCase(str) {",
+			"  var final_str = str.replace(/\\w\\S*/g, function (txt) {",
+			"    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()",
+			"  })",
+			"  return final_str",
+			"}"
+		]
+	},
+	"promise_all": {
+		"prefix": "promise_all",
+		"body": [
+			"Promise.all([",
+			"  helpers_get_(url1),",
+			"  helpers_get_(url2),",
+			"  helpers_get_(url3),",
+			"]).then(",
+			"  function(response) {",
+			"    // response[0], response[1], response[2] has outputs from individual URLs",
+			"})"
+		],
+		"description": "Multiple ajax requests via promise all"
+	}
+}

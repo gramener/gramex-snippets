@@ -37,11 +37,13 @@ Auto-complete YAML configuration for `Gramex` endpoints.
 
 Current features:
 
-- `FileHandler` endpoint
-- `FormHandler` flat files and database endpoints
-- `auth` endpoints
+- Handlers
+  - `FileHandler` endpoint
+  - `FormHandler` flat files and database endpoints
+  - `FunctionHandler`
+- `auth` endpoints (`DBAuth`, `GoogleAuth`, `SimpleAuth`)
 - Custom `log` and `session` configurations
-- `email` service
+- Services: `email`, `alert`, `capture`, `schedule`
 - Caching assets
 
 ## Release Notes
