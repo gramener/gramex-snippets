@@ -1,0 +1,151 @@
+snippet grx-filehandler "# filehandler"
+project/home:
+  pattern: /$YAMLURL/${1:home}
+  handler: FileHandler
+  kwargs:
+    path: $YAMLPATH/${2:index}.html
+    #auth: &HEADERS
+    template: true"
+endsnippet
+
+snippet grx-formhandler-db "# formhandler-db"
+db_endpoint_:
+  pattern: /$YAMLURL/$1
+  handler: FormHandler
+  kwargs:
+    # prepare: $2.$3
+    url: $connection_str         // this is a SQLAlchemy URL string
+    table: $4
+    # modify: project_app.modify_data
+    #auth: &HEADERS"
+endsnippet
+
+snippet grx-formhandler-csv "# formhandler-csv"
+csv_endpoint_:
+  pattern: /$YAMLURL/${1:data}
+  handler: FormHandler
+  kwargs:
+    # prepare: project_app.prepare_args
+    url: $YAMLPATH/assets/data/${2:data}.csv
+    # modify: project_app.modify_data
+    #auth: &HEADERS"
+endsnippet
+
+snippet grx-cache-assets "# cache-assets"
+project-static_files:
+  pattern: /$YAMLURL/(assets/data/.*|assets/img/.*)  # Map all static files
+  handler: FileHandler
+  kwargs:
+    path: $YAMLPATH/              # from under this directory
+    Cache-Control: public, max-age=315360000    # Cache for 10 years on the browser
+    #auth: &HEADERS
+  cache: true                   # Also cache on the server"
+endsnippet
+
+snippet grx-function "# functionhandler"
+project-function:
+  pattern: /$YAMLURL/${1:func}
+  handler: FunctionHandler
+  kwargs:
+    function: ${2:project_app}.utility
+endsnippet
+
+snippet grx-auth-simple "# auth-simple"
+login/simple:
+  pattern: /$YAMLURL/${1:simple}   # Map this URL
+  handler: SimpleAuth     # to the SimpleAuth handler
+  kwargs:
+    credentials:       # Specify the user IDs and passwords
+      alpha: alpha       # User: alpha has password: alpha
+      gamma:          # The user gamma is defined as a mapping
+        password: pwd     # One of the keys MUST be 'password'
+        role: user      # Additional keys can be defined
+    template: $YAMLPATH/${2:simple}.html   # Optional login template"
+endsnippet
+
+snippet grx-auth-google "# auth-google"
+login/google:
+  pattern: /$YAMLURL/${1:google}   # Map this URL
+  handler: GoogleAuth     # to the GoogleAuth handler
+  kwargs:
+    key: ${2:YOURKEY}      # Set your app key
+    secret: ${3:YOURSECRET}    # Set your app secret"
+endsnippet
+
+snippet grx-auth-db "# auth-db"
+project/db:
+  pattern: /$YAMLURL/${1:db}       # Map this URL
+  handler: DBAuth           # to the DBAuth handler
+  kwargs:
+    url: $YAMLPATH/${2:auth.xlsx}    # Pick up list of users from this XLSX (or CSV) file
+    user:
+      column: user          # The user column in users table has the user ID
+    password:
+      column: password        # The users.password column has the password
+    redirect:             # After logging in, redirect the user to:
+      query: next           #    the ?next= URL
+      header: Referer         # else the Referer: header (i.e. page before login)
+      url: /$YAMLURL/       # else the home page of current directory"
+endsnippet
+
+snippet grx-email "# gramex-email"
+email:
+  gramex-guide-gmail:
+    type: gmail           # Type of email used is GMail
+    email: gramex.guide@gmail.com   # Generic email ID used to test e-mails
+    password: tlpmupxnhucitpte    # App-specific password created for Gramex guide"
+endsnippet
+
+snippet grx-custom-session "# custom-session"
+app:
+  session:
+    type: json                 # Type of store to use: json, sqlite, memory
+    path: $YAMLPATH/sessions/session.json  # Path to the store (ignored for type: memory)
+    expiry: 31                 # Session cookies expiry in days
+    flush: 5                 # Write store to disk periodically (in seconds)
+    purge: 111600              # Delete old sessions periodically (31 days, in seconds)
+  settings:
+    serve_traceback: False"
+endsnippet
+
+snippet grx-custom-log "# custom-log"
+log:
+  handlers:
+    logfile:
+      filename: $GRAMEXDATA/your_app/gramex.log
+    requests:
+      filename: $GRAMEXDATA/your_app/requests.csv
+endsnippet
+
+snippet grx-schedule "# schedule"
+schedule:
+  run-when-i-say:
+    function: ${1:schedule_utils}'.'${2:log_time()}
+    minutes: '15, 45'       # Every 15th & 45th minute
+    hours: '*/4'        # Every 4 hours
+    dates: '1, L'         # On the first and last days of the month
+    weekdays: 'mon-fri'     # On weekdays
+    months: '*'         # In every month
+    years: '2016, 2017'     # the next 2 years"
+endsnippet
+
+snippet grx-alert "# alert"
+alert:
+  alert-schedule:
+    #startup: true
+    days: '*'           # Send email every day
+    hours: '6, 12'        # at 6am and 12noon local time
+    minutes: 0          # at the 0th minute, i.e. 6:00am and 12:00pm
+    to: ${1:admin@example.org}
+    subject: ${2:Scheduled alert}
+    body: ${3:This email will be scheduled and sent as long as Gramex is running.}
+endsnippet
+
+snippet grx-capture "# capture"
+url:
+  capture:
+    pattern: /$YAMLURL/capture
+    handler: CaptureHandler
+    kwargs:
+      engine: chrome   # runs on 9000 port
+endsnippet
